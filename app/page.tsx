@@ -47,7 +47,7 @@ export default function Home() {
                     aria-labelledby="hero-title"
                 >
                     <div className="w-full h-full max-w-7xl px-4 flex flex-col items-center py-25 gap-25">
-                        <Image src="/zerocode.svg" alt="ZeroCode" width={200} height={200} priority/>
+                        <Image src="/zerocode.svg" alt="ZeroCode" width={250} height={250} priority/>
 
                         <div className="flex flex-col md:flex-row gap-25">
                             <header className="w-full md:w-3/5 flex flex-col gap-10 p-2">
