@@ -109,7 +109,7 @@ export default function ConsultationForm() {
     return (
         <div className="w-full md:w-2/5">
             <div
-                className="bg-white w-full h-full rounded-4xl px-10 py-20 flex flex-col justify-between gap-10"
+                className="bg-white w-full h-full rounded-4xl px-4 md:px-10 py-20 flex flex-col justify-between gap-10"
                 style={{boxShadow: '0 10px 40px rgba(0, 0, 0, 0.08)'}}>
 
                 {/* Header */}

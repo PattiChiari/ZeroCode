@@ -40,7 +40,7 @@ export default function Home() {
 
     return (
         <>
-            <main className="h-fit w-screen p-4">
+            <main className="h-fit w-screen md:p-4">
                 <section
                     className="w-full h-full rounded-4xl flex justify-center"
                     style={{background: "linear-gradient(143deg,rgba(223, 232, 255, 1) 0%, rgba(247, 242, 251, 1) 50%, rgba(226, 217, 234, 1) 100%)"}}
@@ -50,13 +50,13 @@ export default function Home() {
                         <Image src="/zerocode.svg" alt="ZeroCode" width={200} height={200} priority/>
 
                         <div className="flex flex-col md:flex-row gap-25">
-                            <header className="w-full md:w-3/5 flex flex-col gap-10">
-                                <h1 id="hero-title" className="text-4xl font-medium tracking-tighter text-gray-800">
+                            <header className="w-full md:w-3/5 flex flex-col gap-10 p-2">
+                                <h1 id="hero-title" className="text-2xl md:text-4xl font-medium tracking-tighter text-gray-800">
                                     Anticipa ogni imprevisto e tutela ogni tuo cliente, rafforzando il prestigio della tua
                                     agenzia immobiliare
                                 </h1>
 
-                                <p className="text-lg text-gray-600">
+                                <p className="text-base md:text-lg text-gray-600">
                                     Gestiamo tutte le operazioni quali volture, subentri e allacci di luce, gas, acqua e
                                     telecomunicazioni senza fare file agli sportelli. Offri ai tuoi clienti un servizio smart e
                                     strutturato che rafforza la relazione e genera nuove opportunità.
