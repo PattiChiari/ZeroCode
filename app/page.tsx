@@ -46,8 +46,8 @@ export default function Home() {
                     style={{background: "linear-gradient(143deg,rgba(223, 232, 255, 1) 0%, rgba(247, 242, 251, 1) 50%, rgba(226, 217, 234, 1) 100%)"}}
                     aria-labelledby="hero-title"
                 >
-                    <div className="w-full h-full max-w-7xl px-4 flex flex-col py-25 gap-25">
-                        <Image src="/zerocode.svg" alt="ZeroCode" width={150} height={150} priority/>
+                    <div className="w-full h-full max-w-7xl px-4 flex flex-col items-center py-25 gap-25">
+                        <Image src="/zerocode.svg" alt="ZeroCode" width={200} height={200} priority/>
 
                         <div className="flex flex-col md:flex-row gap-25">
                             <header className="w-full md:w-3/5 flex flex-col gap-10">
