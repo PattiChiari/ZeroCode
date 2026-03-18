@@ -1,13 +1,22 @@
 import {google} from 'googleapis';
 import {NextRequest, NextResponse} from 'next/server';
-import path from 'path';
 
 const SPREADSHEET_ID = '1xMnTXrMrjs3gXz_6Vm8voddWGEjmRbrps5qbzKaWGxQ';
 
-const auth = new google.auth.GoogleAuth({
-    keyFile: path.join(process.cwd(), 'credentials.json'),
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-});
+const getAuth = () => {
+    const credentialsJson = process.env.GOOGLE_CREDENTIALS;
+
+    if (!credentialsJson) {
+        throw new Error('Variabile d\'ambiente GOOGLE_CREDENTIALS non configurata');
+    }
+
+    const credentials = JSON.parse(credentialsJson);
+
+    return new google.auth.GoogleAuth({
+        credentials,
+        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+    });
+};
 
 const validatePhone = (phone: string): boolean => {
     return /^[\d\s+()\-]+$/.test(phone) && phone.replace(/\D/g, '').length >= 10;
@@ -31,11 +40,11 @@ const formatDate = (isoDate: string): string => {
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const {ragione_sociale, numero_telefono, data} = body;
+        const {nominativo, numero_telefono, data} = body;
 
         // Validazione server-side
-        if (!ragione_sociale || typeof ragione_sociale !== 'string' || ragione_sociale.trim() === '') {
-            return NextResponse.json({message: 'Ragione sociale mancante o invalida'}, {status: 400});
+        if (!nominativo || typeof nominativo !== 'string' || nominativo.trim() === '') {
+            return NextResponse.json({message: 'Nominativo mancante o invalido'}, {status: 400});
         }
 
         if (!numero_telefono || typeof numero_telefono !== 'string' || numero_telefono.trim() === '') {
@@ -52,6 +61,7 @@ export async function POST(req: NextRequest) {
 
         const formattedDate = formatDate(data);
 
+        const auth = getAuth();
         const sheets = google.sheets({version: 'v4', auth});
 
         await sheets.spreadsheets.values.append({
@@ -59,7 +69,7 @@ export async function POST(req: NextRequest) {
             range: 'A:C',
             valueInputOption: 'RAW',
             requestBody: {
-                values: [[ragione_sociale.trim(), numero_telefono.trim(), formattedDate]],
+                values: [[nominativo.trim(), numero_telefono.trim(), formattedDate]],
             },
         });
 
@@ -69,4 +79,3 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({message: 'Errore durante il salvataggio del contatto'}, {status: 500});
     }
 }
-

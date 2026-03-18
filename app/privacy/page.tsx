@@ -1,19 +1,25 @@
-"use client";
-
+import type {Metadata} from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+    title: "Informativa Privacy",
+    description:
+        "Informativa sul trattamento dei dati personali per il servizio ZeroCode dedicato alle agenzie immobiliari.",
+    alternates: {
+        canonical: "/privacy",
+    },
+};
 
 export default function Privacy() {
     return (
-        <section className="h-fit w-screen p-4">
-            <div className="w-full h-full flex justify-center">
-
-                <div className="w-full h-full max-w-4xl px-4 py-20 flex flex-col gap-10">
-
-                    <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-5">
+        <main className="h-fit w-screen p-4" aria-labelledby="privacy-title">
+            <section className="w-full h-full flex justify-center">
+                <article className="w-full h-full max-w-4xl px-4 py-20 flex flex-col gap-10">
+                    <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-5" aria-label="Torna alla home page">
                         <span className="text-sm font-medium">Torna alla home</span>
                     </Link>
 
-                    <h1 className="text-4xl font-medium text-gray-800">Informativa Privacy</h1>
+                    <h1 id="privacy-title" className="text-4xl font-medium text-gray-800">Informativa Privacy</h1>
 
                     <div className="bg-white rounded-2xl p-10 space-y-8 text-gray-700 leading-relaxed">
                         <div>
@@ -22,9 +28,9 @@ export default function Privacy() {
                                 Titolare del trattamento dei dati personali è <strong>SADE S.r.l.s.</strong> (brand
                                 ZeroCode)<br/>
                                 P.IVA: 03231060645<br/>
-                                Sede legale: Corso V. Emanuele, 262, 83031 Ariano Irpino (AV)<br/>
-                                Email: pattichiari@insade.it<br/>
-                                Telefono: +39 370 308 1414
+                                Sede operativa: Via della Romita, 113, 59100 Prato (PO)<br/>
+                                Email: <a className="underline" href="mailto:zerocode@insade.it">zerocode@insade.it</a><br/>
+                                Telefono: <a className="underline" href="tel:+393500617321">+39 350 061 7321</a>
                             </p>
                         </div>
 
@@ -32,7 +38,7 @@ export default function Privacy() {
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Dati Personali Trattati</h2>
                             <p className="mb-3">Nel modulo di contatto raccogliamo i seguenti dati personali:</p>
                             <ul className="list-disc list-inside space-y-2 ml-4">
-                                <li><strong>Ragione sociale:</strong> denominazione dell&apos;agenzia immobiliare</li>
+                                <li><strong>Nominativo:</strong> nome e cognome del referente</li>
                                 <li><strong>Numero di telefono:</strong> numero di contatto telefonico</li>
                                 <li><strong>Data di compilazione:</strong> data e ora dell&apos;invio della richiesta
                                 </li>
@@ -110,7 +116,7 @@ export default function Privacy() {
                             </ul>
                             <p className="mt-4">
                                 Per esercitare questi diritti, potete contattarci
-                                a <strong>pattichiari@insade.it</strong>
+                                a <a className="underline" href="mailto:zerocode@insade.it">zerocode@insade.it</a>
                             </p>
                         </div>
 
@@ -166,8 +172,8 @@ export default function Privacy() {
                                 Per qualsiasi domanda riguardante questa informativa o per contattare il nostro
                                 Responsabile della Protezione
                                 dei Dati (DPO), scrivete a:<br/>
-                                <strong>Email:</strong> pattichiari@insade.it<br/>
-                                <strong>Telefono:</strong> +39 370 308 1414
+                                <strong>Email:</strong> <a className="underline" href="mailto:zerocode@insade.it">zerocode@insade.it</a><br/>
+                                <strong>Telefono:</strong> <a className="underline" href="tel:+393500617321">+39 350 061 7321</a>
                             </p>
                         </div>
 
@@ -178,30 +184,28 @@ export default function Privacy() {
                             </p>
                         </div>
                     </div>
-                </div>
-            </div>
+                </article>
+            </section>
 
-            {/*Footer*/}
-            <div className="w-full h-full rounded-4xl flex justify-center">
-                <div className="w-full h-full max-w-7xl flex flex-wrap gap-2 text-xs p-4">
+            <footer className="w-full h-full rounded-4xl flex justify-center" aria-label="Informazioni aziendali">
+                <div className="w-full h-full max-w-7xl flex flex-wrap gap-2 text-xs p-4 items-center">
                     <span className="font-medium">
                         ZeroCode è un brand di SADE S.r.l.s.
                     </span>
                     <span className="opacity-80">
                         P.IVA: 03231060645
                     </span>
-                    <span className="opacity-80">
-                        Sede legale: Corso V. Emanuele, 262, 83031 Ariano Irpino (AV)
-                    </span>
-                    <span className="opacity-80">
-                        Cel: +39 370 308 1414
-                    </span>
-                    <span className="opacity-80">
-                        Email: pattichiari@insade.it
-                    </span>
+                    <address className="not-italic opacity-80">
+                        Sede operativa: Via della Romita, 113, 59100 Prato (PO)
+                    </address>
+                    <a className="opacity-80 underline" href="tel:+393500617321">
+                        Cel: +39 350 061 7321
+                    </a>
+                    <a className="opacity-80 underline" href="mailto:zerocode@insade.it">
+                        Email: zerocode@insade.it
+                    </a>
                 </div>
-            </div>
-        </section>
+            </footer>
+        </main>
     );
 }
-

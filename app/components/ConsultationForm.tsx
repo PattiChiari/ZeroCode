@@ -6,11 +6,11 @@ import Link from "next/link";
 
 export default function ConsultationForm() {
     const [formData, setFormData] = useState({
-        ragione_sociale: "",
+        nominativo: "",
         numero_telefono: "",
     });
     const [errors, setErrors] = useState({
-        ragione_sociale: "",
+        nominativo: "",
         numero_telefono: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,8 +31,8 @@ export default function ConsultationForm() {
         }));
 
         let error = "";
-        if (key === "ragione_sociale" && value.trim() === "") {
-            error = "La ragione sociale è obbligatoria";
+        if (key === "nominativo" && value.trim() === "") {
+            error = "Il nominativo è obbligatorio";
         } else if (key === "numero_telefono" && value.trim() !== "" && !validatePhone(value)) {
             error = "Numero di telefono non valido";
         }
@@ -46,10 +46,10 @@ export default function ConsultationForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const newErrors = {ragione_sociale: "", numero_telefono: ""};
+        const newErrors = {nominativo: "", numero_telefono: ""};
 
-        if (!formData.ragione_sociale.trim()) {
-            newErrors.ragione_sociale = "La ragione sociale è obbligatoria";
+        if (!formData.nominativo.trim()) {
+            newErrors.nominativo = "Il nominativo è obbligatorio";
         }
 
         if (!formData.numero_telefono.trim()) {
@@ -61,7 +61,7 @@ export default function ConsultationForm() {
         setErrors(newErrors);
         setSubmitMessage(null);
 
-        if (newErrors.ragione_sociale || newErrors.numero_telefono) {
+        if (newErrors.nominativo || newErrors.numero_telefono) {
             return;
         }
 
@@ -74,7 +74,7 @@ export default function ConsultationForm() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    ragione_sociale: formData.ragione_sociale,
+                    nominativo: formData.nominativo,
                     numero_telefono: formData.numero_telefono,
                     data: new Date().toISOString(),
                 }),
@@ -92,8 +92,8 @@ export default function ConsultationForm() {
                 type: "success",
                 text: result?.message || "Contatto salvato con successo!",
             });
-            setFormData({ragione_sociale: "", numero_telefono: ""});
-            setErrors({ragione_sociale: "", numero_telefono: ""});
+            setFormData({nominativo: "", numero_telefono: ""});
+            setErrors({nominativo: "", numero_telefono: ""});
         } catch (error) {
             const message = error instanceof Error ? error.message : "Errore durante il salvataggio";
             setSubmitMessage({type: "error", text: message});
@@ -101,6 +101,10 @@ export default function ConsultationForm() {
             setIsSubmitting(false);
         }
     };
+
+    const formStatusId = "form-status";
+    const nominativoErrorId = "nominativo-error";
+    const telefonoErrorId = "numero-telefono-error";
 
     return (
         <div className="w-full md:w-2/5">
@@ -111,7 +115,7 @@ export default function ConsultationForm() {
                 {/* Header */}
                 <div className="flex flex-col items-center gap-6">
                     <div className="flex items-center gap-2 bg-blue-50 w-fit px-3 py-1 rounded-full">
-                        <Image src={'./trending-up.svg'} alt={'Trending Up'} width={20} height={20}/>
+                        <Image src={'/trending-up.svg'} alt="" aria-hidden="true" width={20} height={20}/>
                         <span className="text-sm text-blue-600">Aumenta il valore della tua agenzia</span>
                     </div>
 
@@ -129,52 +133,74 @@ export default function ConsultationForm() {
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
                     <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium ml-4 text-gray-900">
-                            Ragione sociale*
+                        <label htmlFor="nominativo" className="text-sm font-medium ml-4 text-gray-900">
+                            Nominativo*
                         </label>
                         <input
+                            id="nominativo"
                             type="text"
-                            name="ragione_sociale"
-                            value={formData.ragione_sociale}
+                            name="nominativo"
+                            value={formData.nominativo}
                             onChange={handleChange}
-                            placeholder="Agenzia Rossi S.r.l."
+                            placeholder="Mario Rossi"
+                            autoComplete="name"
+                            required
+                            aria-required="true"
+                            aria-invalid={Boolean(errors.nominativo)}
+                            aria-describedby={errors.nominativo ? nominativoErrorId : undefined}
                             className={`px-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-gray-900 ${
-                                errors.ragione_sociale ? "border-red-500" : "border-gray-200"
+                                errors.nominativo ? "border-red-500" : "border-gray-200"
                             }`}
                         />
-                        {errors.ragione_sociale && <span className="ml-4 text-xs text-red-500">{errors.ragione_sociale}</span>}
+                        {errors.nominativo && (
+                            <span id={nominativoErrorId} className="ml-4 text-xs text-red-500" role="alert">
+                                {errors.nominativo}
+                            </span>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <label className="text-sm font-medium ml-4 text-gray-900">
+                        <label htmlFor="numero_telefono" className="text-sm font-medium ml-4 text-gray-900">
                             Numero di telefono*
                         </label>
                         <input
+                            id="numero_telefono"
                             type="tel"
                             name="numero_telefono"
                             value={formData.numero_telefono}
                             onChange={handleChange}
                             placeholder="+39 123 456 7890"
+                            autoComplete="tel"
+                            inputMode="tel"
+                            required
+                            aria-required="true"
+                            aria-invalid={Boolean(errors.numero_telefono)}
+                            aria-describedby={errors.numero_telefono ? telefonoErrorId : undefined}
                             className={`px-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400 text-gray-900 ${
                                 errors.numero_telefono ? "border-red-500" : "border-gray-200"
                             }`}
                         />
-                        {errors.numero_telefono && <span className="ml-4 text-xs text-red-500">{errors.numero_telefono}</span>}
+                        {errors.numero_telefono && (
+                            <span id={telefonoErrorId} className="ml-4 text-xs text-red-500" role="alert">
+                                {errors.numero_telefono}
+                            </span>
+                        )}
                     </div>
 
                     <button
                         type="submit"
                         disabled={isSubmitting}
+                        aria-busy={isSubmitting}
                         className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-full w-full transition-colors flex items-center justify-center gap-2 mt-2"
                     >
                         {isSubmitting ? "Invio in corso..." : "Richiedi la consulenza gratuita"}
-                        <Image src={'./arrow-forward.svg'} alt={'Arrow Forward'} width={20} height={20}/>
+                        <Image src={'/arrow-forward.svg'} alt="" aria-hidden="true" width={20} height={20}/>
                     </button>
 
                     {submitMessage && (
-                        <p className={`text-xs text-center ${submitMessage.type === "success" ? "text-green-600" : "text-red-500"}`}>
+                        <p id={formStatusId} role="status" aria-live="polite" className={`text-xs text-center ${submitMessage.type === "success" ? "text-green-600" : "text-red-500"}`}>
                             {submitMessage.text}
                         </p>
                     )}
