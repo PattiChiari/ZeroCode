@@ -12,16 +12,18 @@ export const metadata: Metadata = {
 
 export default function Privacy() {
     return (
-        <main className="h-fit w-screen p-4" aria-labelledby="privacy-title">
+        <main className="h-fit w-screen md:p-4" aria-labelledby="privacy-title">
             <section className="w-full h-full flex justify-center">
-                <article className="w-full h-full max-w-4xl px-4 py-20 flex flex-col gap-10">
-                    <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-5" aria-label="Torna alla home page">
-                        <span className="text-sm font-medium">Torna alla home</span>
-                    </Link>
+                <article className="w-full h-full max-w-4xl flex flex-col gap-10">
 
-                    <h1 id="privacy-title" className="text-4xl font-medium text-gray-800">Informativa Privacy</h1>
+                    <div className="bg-white rounded-2xl px-4 py-20 space-y-8 text-gray-700 leading-relaxed">
 
-                    <div className="bg-white rounded-2xl p-10 space-y-8 text-gray-700 leading-relaxed">
+                        <Link href="/" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-5" aria-label="Torna alla home page">
+                            <span className="text-sm font-medium">Torna alla home</span>
+                        </Link>
+
+                        <h1 id="privacy-title" className="text-4xl font-medium text-gray-800">Informativa Privacy</h1>
+
                         <div>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Titolare del Trattamento</h2>
                             <p>
