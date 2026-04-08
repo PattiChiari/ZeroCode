@@ -81,12 +81,12 @@ export default function Privacy() {
                             <p className="mb-3">I vostri dati saranno accessibili a:</p>
                             <ul className="list-disc list-inside space-y-2 ml-4">
                                 <li>Personale interno di SADE S.r.l.s. autorizzato al trattamento</li>
-                                <li>Google LLC (tramite Google Sheets per l&apos;archiviazione dei dati)</li>
+                                <li>Google LLC (tramite Google Sheets per l&apos;archiviazione dei dati del modulo contatti)</li>
+                                <li>Google LLC (tramite Google Analytics per l&apos;analisi del traffico - solo se consenso fornito)</li>
                                 <li>Autorità competenti, se richiesto per legge</li>
                             </ul>
                             <p className="mt-4 text-sm">
-                                <strong>Nota:</strong> I dati sono archiviati su Google Sheets con i più alti standard
-                                di sicurezza e protezione.
+                                <strong>Nota:</strong> I dati del modulo di contatto sono archiviati su Google Sheets. I dati di analytics sono tracciati da Google Analytics solo previo consenso esplicito dell&apos;utente.
                             </p>
                         </div>
 
@@ -147,24 +147,23 @@ export default function Privacy() {
                         <div>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Cookie e Tracking</h2>
                             <p className="mb-4">
-                                Il nostro sito <strong>NON utilizza cookie</strong> di alcun tipo, né cookie essenziali,
-                                né cookie di tracciamento o analitici. Non eseguiamo profilazione né raccogliamo dati di
-                                navigazione dei visitatori.
+                                Il nostro sito utilizza <strong>Google Analytics</strong> per analizzare l'utilizzo del servizio e migliorare l'esperienza dell'utente. Questo tracciamento è <strong>completamente facoltativo</strong> e richiede il tuo consenso esplicito.
                             </p>
 
+                            <p className="mb-3 font-semibold text-gray-800">Google Analytics:</p>
+                            <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
+                                <li>Traccia le pagine visitate, il tempo trascorso e il dispositivo utilizzato</li>
+                                <li>Non raccoglie dati personali identificativi senza consenso</li>
+                                <li>Viene caricato <strong>solo se accetti</strong> il banner di consenso</li>
+                                <li>Puoi rifiutare in qualsiasi momento tramite il banner cookie</li>
+                            </ul>
+
                             <p className="text-sm text-gray-600 mb-4">
-                                <strong>Nessun Cookie Impostato:</strong> Il sito è progettato per funzionare
-                                completamente senza l&apos;utilizzo di cookie. Tutte le funzionalità, incluso il modulo
-                                di contatto, operano senza salvare dati nel browser dell&apos;utente.
+                                <strong>Cookie di Analytics:</strong> Google Analytics utilizza cookie per tracciare le sessioni. Questi cookie sono impostati <strong>solo se hai dato il tuo consenso</strong>. Se rifiuti, non verranno impostati cookie di alcun tipo.
                             </p>
 
                             <p className="text-sm text-gray-600">
-                                <strong>Tracciamento:</strong> Non utilizziamo servizi di analytics, pixel di
-                                tracciamento
-                                o sistemi di profilazione (come Google Analytics, Facebook Pixel, ecc.). L&apos;unico
-                                dato
-                                raccolto è quello inserito volontariamente nel modulo di contatto, che viene salvato
-                                esclusivamente su Google Sheets per rispondere alla vostra richiesta.
+                                <strong>Tracciamento Condizionale:</strong> L'unico servizio di analytics utilizzato è Google Analytics, condizionato al consenso. Non utilizziamo altri servizi di tracciamento, pixel di retargeting o sistemi di profilazione pubblicitaria.
                             </p>
                         </div>
 
@@ -181,7 +180,7 @@ export default function Privacy() {
 
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                             <p className="text-sm text-blue-900">
-                                <strong>Ultimo aggiornamento:</strong> 18 Marzo 2026<br/>
+                                <strong>Ultimo aggiornamento:</strong> 8 Aprile 2026<br/>
                                 Questa informativa può essere aggiornata in qualsiasi momento senza preavviso.
                             </p>
                         </div>
