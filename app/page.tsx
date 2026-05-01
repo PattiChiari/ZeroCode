@@ -16,8 +16,8 @@ const benefits = [
     "Meno tempo perso in pratiche e burocrazia",
     "Da remoto e con un interlocutore",
     "Più valore percepito dal cliente",
-    "Più passaparola e nuove opportunità",
-    "Più fatturato per la tua agenzia",
+    "Garanzie sulle pratiche gestite",
+    "Supporto costante pre e post attivazione",
 ];
 
 export default function Home() {
@@ -52,19 +52,17 @@ export default function Home() {
                         <div className="flex flex-col md:flex-row gap-25">
                             <header className="w-full md:w-3/5 flex flex-col gap-10 p-2">
                                 <h1 id="hero-title" className="text-2xl md:text-4xl font-medium tracking-tighter text-gray-800">
-                                    Anticipa ogni imprevisto e tutela ogni tuo cliente, rafforzando il prestigio della tua
-                                    agenzia immobiliare
+                                    Risparmia tempo e previeni ogni imprevisto
                                 </h1>
 
                                 <p className="text-base md:text-lg text-gray-600">
                                     Gestiamo tutte le operazioni quali volture, subentri e allacci di luce, gas, acqua e
-                                    telecomunicazioni senza fare file agli sportelli. Offri ai tuoi clienti un servizio smart e
-                                    strutturato che rafforza la relazione e genera nuove opportunità.
+                                    telecomunicazioni senza fare file agli sportelli.
                                 </p>
 
                                 <section aria-labelledby="benefits-title" className="flex flex-col gap-2">
                                     <h2 id="benefits-title" className="text-xs text-gray-600 ml-4">
-                                        Perché scegliere ZeroCode?
+                                        Perché affidarsi a ZeroCode?
                                     </h2>
 
                                     <ul className="flex flex-col gap-2" role="list">

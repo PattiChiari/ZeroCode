@@ -38,12 +38,24 @@ export default function Privacy() {
 
                         <div>
                             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Dati Personali Trattati</h2>
-                            <p className="mb-3">Nel modulo di contatto raccogliamo i seguenti dati personali:</p>
+                            <p className="mb-3">
+                                Il modulo viene compilato da un <strong>operatore intermediario</strong> (es. agenzia immobiliare, CAF, tabaccheria o altro soggetto convenzionato) per conto del proprio cliente finale. Raccogliamo le seguenti informazioni:
+                            </p>
+                            <p className="mb-2 font-semibold text-gray-800">Dati dell&apos;intermediario</p>
+                            <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
+                                <li><strong>Denominazione:</strong> nome dell&apos;agenzia, studio, esercizio o professionista che effettua la registrazione</li>
+                            </ul>
+                            <p className="mb-2 font-semibold text-gray-800">Dati del cliente finale</p>
+                            <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
+                                <li><strong>Nome e Cognome:</strong> dati anagrafici del cliente</li>
+                                <li><strong>Numero di telefono:</strong> recapito telefonico del cliente (10 cifre)</li>
+                                <li><strong>Indirizzo email:</strong> indirizzo di posta elettronica del cliente</li>
+                            </ul>
+                            <p className="mb-2 font-semibold text-gray-800">Dati relativi al servizio richiesto</p>
                             <ul className="list-disc list-inside space-y-2 ml-4">
-                                <li><strong>Nominativo:</strong> nome e cognome del referente</li>
-                                <li><strong>Numero di telefono:</strong> numero di contatto telefonico</li>
-                                <li><strong>Data di compilazione:</strong> data e ora dell&apos;invio della richiesta
-                                </li>
+                                <li><strong>Servizi utility</strong> (luce, gas, acqua): se selezionati, viene indicato il tipo di operazione richiesta (cambio, voltura/subentro, allaccio)</li>
+                                <li><strong>Servizi telco:</strong> se selezionati, viene indicata la tipologia di linea (rete fissa o mobile)</li>
+                                <li><strong>Data di sottoscrizione:</strong> data e ora dell&apos;invio della richiesta</li>
                             </ul>
                         </div>
 
@@ -180,7 +192,7 @@ export default function Privacy() {
 
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                             <p className="text-sm text-blue-900">
-                                <strong>Ultimo aggiornamento:</strong> 8 Aprile 2026<br/>
+                                <strong>Ultimo aggiornamento:</strong> 1 Maggio 2026<br/>
                                 Questa informativa può essere aggiornata in qualsiasi momento senza preavviso.
                             </p>
                         </div>
