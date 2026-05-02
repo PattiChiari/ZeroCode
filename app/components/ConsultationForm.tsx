@@ -135,22 +135,26 @@ export default function ConsultationForm() {
 
                 {/* Header */}
                 <div className="flex flex-col items-center gap-4">
-                    <h2 className="text-2xl font-medium text-gray-800 text-center mb-1">Richiedi una consulenza</h2>
+                    <h2 id="form-title" className="text-2xl font-medium text-gray-800 mb-1">
+                        Compila la richiesta
+                    </h2>
                     <p className="text-gray-600 text-sm leading-relaxed text-center">
                         Ti ricontatteremo dal numero 350 061 7321 entro 24 ore. Niente comunicazioni inutili, niente spam.
                     </p>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate aria-labelledby="form-title">
 
                     {/* Intermediario */}
                     <div className="flex flex-col gap-1">
                         <label htmlFor="intermediario" className="text-sm font-medium ml-4 text-gray-900">Intermediario*</label>
                         <input id="intermediario" type="text" name="intermediario" value={formData.intermediario}
                                onChange={handleChange} placeholder="Nome agenzia o intermediario"
-                               className={inputClass("intermediario")} aria-invalid={Boolean(errors.intermediario)}/>
-                        {errors.intermediario && <span className="ml-4 text-xs text-red-500" role="alert">{errors.intermediario}</span>}
+                               className={inputClass("intermediario")} aria-required="true"
+                               aria-invalid={Boolean(errors.intermediario)}
+                               aria-describedby={errors.intermediario ? "intermediario-error" : undefined}/>
+                        {errors.intermediario && <span id="intermediario-error" className="ml-4 text-xs text-red-500" role="alert">{errors.intermediario}</span>}
                     </div>
 
                     {/* Nome + Cognome */}
@@ -158,16 +162,20 @@ export default function ConsultationForm() {
                         <div className="flex flex-col gap-1 flex-1">
                             <label htmlFor="nome" className="text-sm font-medium ml-4 text-gray-900">Nome*</label>
                             <input id="nome" type="text" name="nome" value={formData.nome}
-                                   onChange={handleChange} placeholder="Mario"
-                                   className={inputClass("nome")} aria-invalid={Boolean(errors.nome)}/>
-                            {errors.nome && <span className="ml-4 text-xs text-red-500" role="alert">{errors.nome}</span>}
+                                   onChange={handleChange} placeholder="Mario" autoComplete="given-name"
+                                   className={inputClass("nome")} aria-required="true"
+                                   aria-invalid={Boolean(errors.nome)}
+                                   aria-describedby={errors.nome ? "nome-error" : undefined}/>
+                            {errors.nome && <span id="nome-error" className="ml-4 text-xs text-red-500" role="alert">{errors.nome}</span>}
                         </div>
                         <div className="flex flex-col gap-1 flex-1">
                             <label htmlFor="cognome" className="text-sm font-medium ml-4 text-gray-900">Cognome*</label>
                             <input id="cognome" type="text" name="cognome" value={formData.cognome}
-                                   onChange={handleChange} placeholder="Rossi"
-                                   className={inputClass("cognome")} aria-invalid={Boolean(errors.cognome)}/>
-                            {errors.cognome && <span className="ml-4 text-xs text-red-500" role="alert">{errors.cognome}</span>}
+                                   onChange={handleChange} placeholder="Rossi" autoComplete="family-name"
+                                   className={inputClass("cognome")} aria-required="true"
+                                   aria-invalid={Boolean(errors.cognome)}
+                                   aria-describedby={errors.cognome ? "cognome-error" : undefined}/>
+                            {errors.cognome && <span id="cognome-error" className="ml-4 text-xs text-red-500" role="alert">{errors.cognome}</span>}
                         </div>
                     </div>
 
@@ -176,9 +184,11 @@ export default function ConsultationForm() {
                         <label htmlFor="telefono" className="text-sm font-medium ml-4 text-gray-900">Numero di telefono*</label>
                         <input id="telefono" type="tel" name="telefono" value={formData.telefono}
                                onChange={handleChange} placeholder="3001234567"
-                               inputMode="numeric" maxLength={10}
-                               className={inputClass("telefono")} aria-invalid={Boolean(errors.telefono)}/>
-                        {errors.telefono && <span className="ml-4 text-xs text-red-500" role="alert">{errors.telefono}</span>}
+                               inputMode="numeric" maxLength={10} autoComplete="tel"
+                               className={inputClass("telefono")} aria-required="true"
+                               aria-invalid={Boolean(errors.telefono)}
+                               aria-describedby={errors.telefono ? "telefono-error" : undefined}/>
+                        {errors.telefono && <span id="telefono-error" className="ml-4 text-xs text-red-500" role="alert">{errors.telefono}</span>}
                     </div>
 
                     {/* Email */}
@@ -187,14 +197,16 @@ export default function ConsultationForm() {
                         <input id="email" type="email" name="email" value={formData.email}
                                onChange={handleChange} placeholder="mario.rossi@esempio.it"
                                autoComplete="email"
-                               className={inputClass("email")} aria-invalid={Boolean(errors.email)}/>
-                        {errors.email && <span className="ml-4 text-xs text-red-500" role="alert">{errors.email}</span>}
+                               className={inputClass("email")} aria-required="true"
+                               aria-invalid={Boolean(errors.email)}
+                               aria-describedby={errors.email ? "email-error" : undefined}/>
+                        {errors.email && <span id="email-error" className="ml-4 text-xs text-red-500" role="alert">{errors.email}</span>}
                     </div>
 
                     {/* Servizi Utility */}
                     <div className="flex flex-col gap-4">
-                        <label className="flex items-center gap-3 cursor-pointer">
-                            <input type="checkbox" name="servizi_utility" checked={formData.servizi_utility}
+                        <label htmlFor="servizi_utility" className="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="servizi_utility" name="servizi_utility" checked={formData.servizi_utility}
                                    onChange={handleChange}
                                    className="w-4 h-4 rounded accent-blue-600"/>
                             <span className="text-sm font-medium text-gray-900">Servizi utility (luce, gas, acqua)</span>
@@ -205,19 +217,20 @@ export default function ConsultationForm() {
                                 <label htmlFor="tipo_operazione" className="text-xs ml-4 text-gray-500">Tipo di operazione*</label>
                                 <select id="tipo_operazione" name="tipo_operazione" value={formData.tipo_operazione}
                                         onChange={handleChange} className={selectClass("tipo_operazione")}
-                                        aria-invalid={Boolean(errors.tipo_operazione)}>
+                                        aria-required="true" aria-invalid={Boolean(errors.tipo_operazione)}
+                                        aria-describedby={errors.tipo_operazione ? "tipo_operazione-error" : undefined}>
                                     <option value="">Seleziona...</option>
                                     {TIPO_OPERAZIONE_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
                                 </select>
-                                {errors.tipo_operazione && <span className="ml-4 text-xs text-red-500" role="alert">{errors.tipo_operazione}</span>}
+                                {errors.tipo_operazione && <span id="tipo_operazione-error" className="ml-4 text-xs text-red-500" role="alert">{errors.tipo_operazione}</span>}
                             </div>
                         )}
                     </div>
 
                     {/* Servizi Telco */}
                     <div className="flex flex-col gap-4">
-                        <label className="flex items-center gap-3 cursor-pointer">
-                            <input type="checkbox" name="servizi_telco" checked={formData.servizi_telco}
+                        <label htmlFor="servizi_telco" className="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="servizi_telco" name="servizi_telco" checked={formData.servizi_telco}
                                    onChange={handleChange}
                                    className="w-4 h-4 rounded accent-blue-600"/>
                             <span className="text-sm font-medium text-gray-900">Servizi telco</span>
@@ -228,11 +241,12 @@ export default function ConsultationForm() {
                                 <label htmlFor="tipo_linea" className="text-xs ml-4 text-gray-500">Tipo di linea*</label>
                                 <select id="tipo_linea" name="tipo_linea" value={formData.tipo_linea}
                                         onChange={handleChange} className={selectClass("tipo_linea")}
-                                        aria-invalid={Boolean(errors.tipo_linea)}>
+                                        aria-required="true" aria-invalid={Boolean(errors.tipo_linea)}
+                                        aria-describedby={errors.tipo_linea ? "tipo_linea-error" : undefined}>
                                     <option value="">Seleziona...</option>
                                     {TIPO_LINEA_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
                                 </select>
-                                {errors.tipo_linea && <span className="ml-4 text-xs text-red-500" role="alert">{errors.tipo_linea}</span>}
+                                {errors.tipo_linea && <span id="tipo_linea-error" className="ml-4 text-xs text-red-500" role="alert">{errors.tipo_linea}</span>}
                             </div>
                         )}
                     </div>
@@ -243,7 +257,7 @@ export default function ConsultationForm() {
                         aria-busy={isSubmitting}
                         className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-full w-full transition-colors flex items-center justify-center gap-2 mt-2"
                     >
-                        {isSubmitting ? "Invio in corso..." : "Richiedi la consulenza gratuita"}
+                        {isSubmitting ? "Invio in corso..." : "Invia la richiesta"}
                         <Image src={"/arrow-forward.svg"} alt="" aria-hidden="true" width={20} height={20}/>
                     </button>
 
@@ -257,7 +271,7 @@ export default function ConsultationForm() {
 
                 {/* Footer */}
                 <div className="flex flex-col gap-2 text-center">
-                    <p className="text-xs text-blue-600">Oltre 500 aziende hanno già scelto ZeroCode</p>
+                    <p className="text-xs text-blue-600">Oltre 500 partner utilizzano per i propri clienti ZeroCode</p>
                     <p className="text-xs text-gray-600">
                         Compilando il form acconsenti al{" "}
                         <Link className="underline" href={"/privacy"}>trattamento dei tuoi dati personali</Link>

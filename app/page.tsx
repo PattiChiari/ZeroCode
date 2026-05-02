@@ -36,6 +36,14 @@ export default function Home() {
             addressRegion: "PO",
             addressCountry: "IT",
         },
+        contactPoint: {
+            "@type": "ContactPoint",
+            telephone: "+39 350 061 7321",
+            email: "zerocode@insade.it",
+            contactType: "customer service",
+            areaServed: "IT",
+            availableLanguage: "Italian",
+        },
     };
 
     return (
