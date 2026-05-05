@@ -49,6 +49,7 @@ export default function Privacy() {
                             <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
                                 <li><strong>Nome e Cognome:</strong> dati anagrafici del cliente</li>
                                 <li><strong>Numero di telefono:</strong> recapito telefonico del cliente (10 cifre)</li>
+                                <li><strong>Regione:</strong> regione italiana di residenza o di interesse del cliente</li>
                                 <li><strong>Indirizzo email:</strong> indirizzo di posta elettronica del cliente</li>
                             </ul>
                             <p className="mb-2 font-semibold text-gray-800">Dati relativi al servizio richiesto</p>
@@ -192,7 +193,7 @@ export default function Privacy() {
 
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                             <p className="text-sm text-blue-900">
-                                <strong>Ultimo aggiornamento:</strong> 1 Maggio 2026<br/>
+                                <strong>Ultimo aggiornamento:</strong> 5 Maggio 2026<br/>
                                 Questa informativa può essere aggiornata in qualsiasi momento senza preavviso.
                             </p>
                         </div>

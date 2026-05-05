@@ -6,6 +6,12 @@ import Link from "next/link";
 
 const TIPO_OPERAZIONE_OPTIONS = ["Cambio", "Voltura/Subentro", "Allaccio"];
 const TIPO_LINEA_OPTIONS = ["Rete fissa", "Mobile"];
+const REGIONI_ITALIANE = [
+    "Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia-Romagna",
+    "Friuli-Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
+    "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
+    "Trentino-Alto Adige", "Umbria", "Valle d'Aosta", "Veneto",
+];
 
 export default function ConsultationForm() {
     const [formData, setFormData] = useState({
@@ -13,6 +19,7 @@ export default function ConsultationForm() {
         nome: "",
         cognome: "",
         telefono: "",
+        regione: "",
         email: "",
         servizi_utility: false,
         tipo_operazione: "",
@@ -56,6 +63,8 @@ export default function ConsultationForm() {
             e.telefono = "Inserire esattamente 10 cifre";
         }
 
+        if (!formData.regione) e.regione = "Campo obbligatorio";
+
         if (!formData.email.trim()) {
             e.email = "Campo obbligatorio";
         } else if (!validateEmail(formData.email)) {
@@ -93,6 +102,7 @@ export default function ConsultationForm() {
                     cognome: formData.cognome.trim(),
                     telefono: formData.telefono.replace(/\s/g, ""),
                     email: formData.email.trim(),
+                    regione: formData.regione,
                     servizi_utility: formData.servizi_utility,
                     tipo_operazione: formData.tipo_operazione,
                     servizi_telco: formData.servizi_telco,
@@ -110,7 +120,7 @@ export default function ConsultationForm() {
 
             setSubmitMessage({type: "success", text: result?.message || "Richiesta inviata con successo!"});
             setFormData({
-                intermediario: "", nome: "", cognome: "", telefono: "", email: "",
+                intermediario: "", nome: "", cognome: "", telefono: "", regione: "", email: "",
                 servizi_utility: false, tipo_operazione: "", servizi_telco: false, tipo_linea: "",
             });
             setErrors({});
@@ -179,16 +189,29 @@ export default function ConsultationForm() {
                         </div>
                     </div>
 
-                    {/* Telefono */}
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="telefono" className="text-sm font-medium ml-4 text-gray-900">Numero di telefono*</label>
-                        <input id="telefono" type="tel" name="telefono" value={formData.telefono}
-                               onChange={handleChange} placeholder="3001234567"
-                               inputMode="numeric" maxLength={10} autoComplete="tel"
-                               className={inputClass("telefono")} aria-required="true"
-                               aria-invalid={Boolean(errors.telefono)}
-                               aria-describedby={errors.telefono ? "telefono-error" : undefined}/>
-                        {errors.telefono && <span id="telefono-error" className="ml-4 text-xs text-red-500" role="alert">{errors.telefono}</span>}
+                    {/* Telefono + Regione */}
+                    <div className="flex gap-3">
+                        <div className="flex flex-col gap-1 flex-1">
+                            <label htmlFor="telefono" className="text-sm font-medium ml-4 text-gray-900">Numero di telefono*</label>
+                            <input id="telefono" type="tel" name="telefono" value={formData.telefono}
+                                   onChange={handleChange} placeholder="3001234567"
+                                   inputMode="numeric" maxLength={10} autoComplete="tel"
+                                   className={inputClass("telefono")} aria-required="true"
+                                   aria-invalid={Boolean(errors.telefono)}
+                                   aria-describedby={errors.telefono ? "telefono-error" : undefined}/>
+                            {errors.telefono && <span id="telefono-error" className="ml-4 text-xs text-red-500" role="alert">{errors.telefono}</span>}
+                        </div>
+                        <div className="flex flex-col gap-1 flex-1">
+                            <label htmlFor="regione" className="text-sm font-medium ml-4 text-gray-900">Regione*</label>
+                            <select id="regione" name="regione" value={formData.regione}
+                                    onChange={handleChange} className={selectClass("regione")}
+                                    aria-required="true" aria-invalid={Boolean(errors.regione)}
+                                    aria-describedby={errors.regione ? "regione-error" : undefined}>
+                                <option value="">Seleziona...</option>
+                                {REGIONI_ITALIANE.map((r) => <option key={r} value={r}>{r}</option>)}
+                            </select>
+                            {errors.regione && <span id="regione-error" className="ml-4 text-xs text-red-500" role="alert">{errors.regione}</span>}
+                        </div>
                     </div>
 
                     {/* Email */}

@@ -29,7 +29,7 @@ const formatDate = (isoDate: string): string => {
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-        const {intermediario, nome, cognome, telefono, email, servizi_utility, tipo_operazione, servizi_telco, tipo_linea, data} = body;
+        const {intermediario, nome, cognome, telefono, regione, email, servizi_utility, tipo_operazione, servizi_telco, tipo_linea, data} = body;
 
         if (!intermediario?.trim()) return NextResponse.json({message: 'Intermediario mancante'}, {status: 400});
         if (!nome?.trim()) return NextResponse.json({message: 'Nome mancante'}, {status: 400});
@@ -37,6 +37,8 @@ export async function POST(req: NextRequest) {
 
         if (!telefono?.trim()) return NextResponse.json({message: 'Numero di telefono mancante'}, {status: 400});
         if (!validatePhone(telefono)) return NextResponse.json({message: 'Numero di telefono non valido (10 cifre)'}, {status: 400});
+
+        if (!regione?.trim()) return NextResponse.json({message: 'Regione mancante'}, {status: 400});
 
         if (!email?.trim()) return NextResponse.json({message: 'Email mancante'}, {status: 400});
         if (!validateEmail(email)) return NextResponse.json({message: 'Email non valida'}, {status: 400});
@@ -56,7 +58,7 @@ export async function POST(req: NextRequest) {
 
         await sheets.spreadsheets.values.append({
             spreadsheetId: SPREADSHEET_ID,
-            range: 'A:J',
+            range: 'A:K',
             valueInputOption: 'RAW',
             requestBody: {
                 values: [[
@@ -69,6 +71,7 @@ export async function POST(req: NextRequest) {
                     tipo_operazione?.trim() || '',
                     servizi_telco ? 'Sì' : 'No',
                     tipo_linea?.trim() || '',
+                    regione.trim(),
                     formatDate(data),
                 ]],
             },
